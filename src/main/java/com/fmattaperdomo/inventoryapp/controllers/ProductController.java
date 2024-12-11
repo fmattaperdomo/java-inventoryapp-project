@@ -5,10 +5,7 @@ import com.fmattaperdomo.inventoryapp.services.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,6 +27,11 @@ public class ProductController {
         logger.info("Get Products:");
         products.forEach((product -> logger.info(product.toString())));
         return products;
+    }
+    @PostMapping("/products")
+    public Product addProduct(@RequestBody Product product){
+        logger.info("Add Product : " + product);
+        return this.productService.saveProduct(product);
     }
 
 }
